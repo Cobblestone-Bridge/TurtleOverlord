@@ -1,0 +1,106 @@
+-- The basic bootstrap.
+-- Logs in and sends the computer ID and CraftOS version.
+print( "[INFO] Starting boostrap program!" )
+
+if not http then
+  print( "[ERROR] The http library is not enabled!" )
+  os.exit()
+end
+
+-- Information about computer.
+local computerID = tostring( os.getComputerID() )
+local computerVersion = tostring( os.version() )
+
+-- Other variables.
+local serverAddress = "http://localhost:9000"
+
+-- Check if the computer is a turtle.
+if turtle then
+  print( "[INFO] This computer is a turtle!" )
+end
+
+ -- Connect function.
+ -- handle - Handler.
+ -- data - Data to be posted.
+ -- type - GET or POST
+local function connect( handle , data , type )
+  write( "[INFO] Connecting to " .. serverAddress .. "/" .. handle .. "... " )
+
+  local ok, err = http.checkURL( serverAddress .. "/" .. handle )
+  if not ok then
+    print( "[ERROR] Failed check." )
+    if err then
+      printError( err )
+    end
+    return nil
+  end
+
+  if type == "GET" then
+    response = http.get( serverAddress .. "/" .. handle )
+  elseif type == "POST" then
+    response = http.post( serverAddress .. "/" .. handle , data )
+  end
+
+  if not response then
+    print( "[ERROR] Failed." )
+    return nil
+  end
+
+  print( "[INFO] Success." )
+
+  local sResponse = response.readAll()
+  response.close()
+  return sResponse
+end
+
+-- Check if md5 library is installed.
+local sPath = shell.resolve( "TurtleOverlord/sha256API" )
+if not fs.exists( sPath ) then
+  print ("[INFO] Downloading sha256 library...")
+  local response = connect( "static/computer/sha256API" , nil , "GET" )
+  if response then
+    local file = fs.open( sPath, "w" )
+    file.write( response )
+    file.close()
+  end
+end
+-- Load md5 library
+md5Loaded = os.loadAPI( sPath )
+if md5Loaded then
+  print( "[INFO] sha256 library loaded!" )
+else
+  print ( "[ERROR] sha256 library failed to load!" )
+end
+
+-- Check if JSON library is installed.
+local sPath = shell.resolve( "TurtleOverlord/jsonAPI" )
+if not fs.exists( sPath ) then
+  print ("[INFO] Downloading JSON library...")
+  local response = connect( "static/computer/jsonAPI" , nil , "GET" )
+  if response then
+    local file = fs.open( sPath, "w" )
+    file.write( response )
+    file.close()
+  end
+end
+-- Load JSON library
+jsonLoaded = os.loadAPI( sPath )
+if jsonLoaded then
+  print( "[INFO] JSON library loaded!" )
+else
+  print ( "[ERROR] JSON library failed to load!" )
+end
+
+-- Login to the server.
+print("[INFO] Logging in...")
+local response = connect( "bootstrap/" , "version=" .. computerVersion .. "&id=" .. computerID , "POST" )
+if response then
+  local obj = jsonAPI.decode( response )
+
+  print( obj.driverChecksum )
+
+  os.setComputerLabel(obj.setLabel)
+end
+
+-- Open the driver file.
+
