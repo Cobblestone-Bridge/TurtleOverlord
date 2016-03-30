@@ -1,11 +1,23 @@
 package main
 
 import (
-	_ "turtleOverlordServer/routers"
-	"github.com/astaxie/beego"
+	//"fmt"
+	"net/http"
+
+	"TurtleOverlord/controllers"
+
+	"github.com/gorilla/mux"
 )
 
-func main() {
-	beego.Run()
-}
 
+func main() {
+    r := mux.NewRouter()
+    r.HandleFunc("/", controllers.Index)
+		r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("../src/TurtleOverlord/static/"))))
+		r.HandleFunc("/bootstrap", controllers.Bootstrap)
+		r.HandleFunc("/job", controllers.Job)
+
+		http.Handle("/", r)
+
+    http.ListenAndServe(":8080", nil)
+}
