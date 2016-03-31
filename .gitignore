@@ -19,7 +19,10 @@ _cgo_gotypes.go
 _cgo_export.*
 
 _testmain.go
+glide.lock
 
 *.exe
 *.test
 *.prof
+
+*~

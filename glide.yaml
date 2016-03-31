@@ -1,0 +1,15 @@
+package: github.com/Cobblestone-Bridge/TurtleOverlord
+import:
+- package: github.com/golang/glog
+- package: github.com/gorilla/context
+- package: github.com/gorilla/sessions
+- package: github.com/zenazn/goji
+  subpackages:
+  - graceful
+  - web
+- package: golang.org/x/crypto
+  subpackages:
+  - bcrypt
+- package: gopkg.in/mgo.v2
+  subpackages:
+  - bson
