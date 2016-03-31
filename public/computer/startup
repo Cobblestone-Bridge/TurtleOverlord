@@ -1,3 +1,4 @@
+-- File type LUA
 -- The basic bootstrap.
 -- Logs in and sends the computer ID and CraftOS version.
 
@@ -120,7 +121,7 @@ local function checkFile(file)
   local sPath = shell.resolve( enviroment .. "/" .. file )
   if not fs.exists( sPath ) then
     log.info("Downloading " .. file .. "...")
-    local response = connect( "static/computer/" .. file , nil , "GET" )
+    local response = connect( "public/computer/" .. file , nil , "GET" )
     if response then
       local file = fs.open( sPath, "w" )
       file.write( response )

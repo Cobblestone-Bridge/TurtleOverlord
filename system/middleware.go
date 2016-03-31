@@ -11,6 +11,14 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+func (application *Application) ApplyConfiguration(c *web.C, h http.Handler) http.Handler {
+	fn := func(w http.ResponseWriter, r *http.Request) {
+		c.Env["Configuration"] = application.Configuration
+		h.ServeHTTP(w, r)
+	}
+	return http.HandlerFunc(fn)
+}
+
 // Makes sure templates are stored in the context
 func (application *Application) ApplyTemplates(c *web.C, h http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {

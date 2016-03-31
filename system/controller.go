@@ -8,7 +8,7 @@ import (
 	"github.com/gorilla/sessions"
 )
 
-type Controller struct {	
+type Controller struct {
 }
 
 func (controller *Controller) GetSession(c web.C) *sessions.Session {
@@ -17,6 +17,10 @@ func (controller *Controller) GetSession(c web.C) *sessions.Session {
 
 func (controller *Controller) GetTemplate(c web.C) *template.Template {
 	return c.Env["Template"].(*template.Template)
+}
+
+func (controller *Controller) GetConfiguration(c web.C) *Configuration {
+	return c.Env["Configuration"].(*Configuration)
 }
 
 func (controller *Controller) GetDatabase(c web.C) *mgo.Database {

@@ -33,6 +33,7 @@ func main() {
 
 	// Apply middleware
 	goji.Use(application.ApplyTemplates)
+	goji.Use(application.ApplyConfiguration)
 	goji.Use(application.ApplySessions)
 	goji.Use(application.ApplyDatabase)
 	goji.Use(application.ApplyAuth)
@@ -42,9 +43,12 @@ func main() {
 	// Couple of files - in the real world you would use nginx to serve them.
 	goji.Get("/robots.txt", http.FileServer(http.Dir(application.Configuration.PublicPath)))
 	goji.Get("/favicon.ico", http.FileServer(http.Dir(application.Configuration.PublicPath+"/images")))
+	goji.Get("/public/*", http.StripPrefix("/public/", http.FileServer(http.Dir(application.Configuration.PublicPath))))
 
 	// Home page
 	goji.Get("/", application.Route(controller, "Index"))
+
+	goji.Post("/bootstrap", application.Route(controller, "BootstrapPost"))
 
 	// Sign In routes
 	goji.Get("/signin", application.Route(controller, "SignIn"))
