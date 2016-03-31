@@ -8,7 +8,7 @@ go get github.com/Cobblestone-Bridge/TurtleOverlord
 ```
 
 # Glide
-To fetch these dependencies automatically we use [glide](http://github.com/Masterminds/glide)
+To fetch these dependencies automatically we use [glide](http://github.com/Masterminds/glide).
 ```
 glide install
 ```
@@ -22,3 +22,24 @@ glide install
  go get gopkg.in/mgo.v2
  go get golang.org/x/crypto
  ```
+
+# Continuous Development
+
+For Continuous Development I recommend using `Fresh` - https://github.com/pilu/fresh
+
+You can install `Fresh` by issuing:
+
+```
+go get github.com/pilu/fresh
+```
+
+Now if you run in the TurtleOverlord source folder:
+
+```
+fresh -c runner.conf
+```
+
+Project should automatically rebuild itself when a change occurs.
+
+# Credit
+The layout of this project was "borrowed" from https://github.com/elcct/defaultproject.
