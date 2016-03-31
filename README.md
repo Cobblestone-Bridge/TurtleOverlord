@@ -9,9 +9,18 @@ go get github.com/Cobblestone-Bridge/TurtleOverlord
 
 # Glide
 To fetch these dependencies automatically we use [glide](http://github.com/Masterminds/glide).
+
+## Install
+```
+go get github.com/Masterminds/glide
+```
+
+## Run
+If you run inside the TurtleOverlord source folder:
 ```
 glide install
 ```
+The dependencies will automatically be installed.
 
 # Dependencies
  ```
@@ -33,7 +42,7 @@ You can install `Fresh` by issuing:
 go get github.com/pilu/fresh
 ```
 
-Now if you run in the TurtleOverlord source folder:
+If you run in the TurtleOverlord source folder:
 
 ```
 fresh -c runner.conf
