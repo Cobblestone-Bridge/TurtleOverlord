@@ -2,8 +2,9 @@ package main
 
 import (
 	"flag"
-	"github.com/golang/glog"
 	"net/http"
+
+	"github.com/golang/glog"
 
 	"github.com/Cobblestone-Bridge/TurtleOverlord/controllers/web"
 	"github.com/Cobblestone-Bridge/TurtleOverlord/system"

@@ -1,10 +1,10 @@
 package helpers
 
 import (
+	"github.com/Cobblestone-Bridge/TurtleOverlord/models"
+	"golang.org/x/crypto/bcrypt"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
-	"golang.org/x/crypto/bcrypt"
-	"github.com/Cobblestone-Bridge/TurtleOverlord/models"
 )
 
 func Login(c *mgo.Database, email string, password string) (user *models.User, err error) {

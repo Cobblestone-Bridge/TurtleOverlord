@@ -3,9 +3,10 @@ package web
 import (
 	"net/http"
 
+	"html/template"
+
 	"github.com/Cobblestone-Bridge/TurtleOverlord/helpers"
 	"github.com/zenazn/goji/web"
-	"html/template"
 )
 
 // Home page route

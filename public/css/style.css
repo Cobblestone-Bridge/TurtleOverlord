@@ -18,13 +18,13 @@ body {
 
 input.parsley-success,
 select.parsley-success,
-textarea.parsley-success {		
+textarea.parsley-success {
 	border: 2px solid #62c462;
 }
 
 input.parsley-error,
 select.parsley-error,
-textarea.parsley-error {		
+textarea.parsley-error {
 	border: 2px solid #ee5f5b;
 }
 

@@ -73,7 +73,7 @@ local computerVersion = tostring( os.version() )
 local computerLabel = os.getComputerLabel()
 
 -- Other variables.
-local serverAddress = "http://localhost:8080"
+local serverAddress = "http://localhost:8000"
 local enviroment = "TurtleOverlord"
 
 local libraries = {"crc32API" ,"md5API", "sha256API", "rpc", "driver1_7", "jsonAPI"}

@@ -1,19 +1,20 @@
 package models
 
 import (
-	mgo "gopkg.in/mgo.v2"
-	"gopkg.in/mgo.v2/bson"
+	"time"
+
 	"github.com/golang/glog"
 	"golang.org/x/crypto/bcrypt"
-	"time"
+	mgo "gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 type User struct {
-  ID       bson.ObjectId `bson:"_id,omitempty"`
-  Email string `bson:"e"`
-  Username string `bson:"u"`
-  Password []byte  `bson:"p"`
-  Timestamp time.Time `bson:"t"`
+	ID        bson.ObjectId `bson:"_id,omitempty"`
+	Email     string        `bson:"e"`
+	Username  string        `bson:"u"`
+	Password  []byte        `bson:"p"`
+	Timestamp time.Time     `bson:"t"`
 }
 
 func (user *User) HashPassword(password string) {

@@ -1,11 +1,12 @@
 package system
 
 import (
+	"compress/gzip"
 	"io"
 	"net/http"
-	"github.com/zenazn/goji/web"
 	"strings"
-	"compress/gzip"
+
+	"github.com/zenazn/goji/web"
 )
 
 type gzipResponseWriter struct {

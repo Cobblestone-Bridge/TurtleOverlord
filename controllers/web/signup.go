@@ -1,12 +1,13 @@
 package web
 
 import (
-	"github.com/Cobblestone-Bridge/TurtleOverlord/models"
-	"github.com/golang/glog"
-	"github.com/zenazn/goji/web"
 	"html/template"
 	"net/http"
 	"time"
+
+	"github.com/Cobblestone-Bridge/TurtleOverlord/models"
+	"github.com/golang/glog"
+	"github.com/zenazn/goji/web"
 )
 
 // Sign up route

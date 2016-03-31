@@ -2,11 +2,12 @@ package system
 
 import (
 	"net/http"
-	"github.com/golang/glog"
-	"github.com/zenazn/goji/web"
+
 	"github.com/Cobblestone-Bridge/TurtleOverlord/models"
+	"github.com/golang/glog"
 	"github.com/gorilla/context"
 	"github.com/gorilla/sessions"
+	"github.com/zenazn/goji/web"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )

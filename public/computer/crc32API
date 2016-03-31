@@ -171,5 +171,5 @@ function hash_s(str,poly)
 end
 
 function hashOfFile(fileName, poly)
-  
+
 end
