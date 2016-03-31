@@ -5,7 +5,7 @@ import (
 	"github.com/golang/glog"
 	"net/http"
 
-	"github.com/Cobblestone-Bridge/TurtleOverlord/web"
+	"github.com/Cobblestone-Bridge/TurtleOverlord/controllers/web"
 	"github.com/Cobblestone-Bridge/TurtleOverlord/system"
 
 	"github.com/zenazn/goji"

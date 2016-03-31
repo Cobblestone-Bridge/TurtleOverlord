@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"github.com/golang/glog"
 	"github.com/zenazn/goji/web"
-	"github.com/Cobblestone-Bridge/TurtleOverlordmodels"
+	"github.com/Cobblestone-Bridge/TurtleOverlord/models"
 	"github.com/gorilla/context"
 	"github.com/gorilla/sessions"
 	mgo "gopkg.in/mgo.v2"

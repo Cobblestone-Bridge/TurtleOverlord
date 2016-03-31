@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/Cobblestone-Bridge/TurtleOverlord/helpers"
-	"github.com/Cobblestone-Bridge/TurtleOverlord/web"
+	"github.com/zenazn/goji/web"
 	"html/template"
 )
 

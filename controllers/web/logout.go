@@ -3,7 +3,7 @@ package web
 import (
 	"net/http"
 
-	"github.com/Cobblestone-Bridge/TurtleOverlord/web"
+	"github.com/zenazn/goji/web"
 )
 
 // This route logs user out
