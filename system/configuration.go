@@ -1,36 +1,40 @@
 package system
 
 import (
-	"encoding/json"
+	"github.com/naoina/toml"
 	"io/ioutil"
+	"os"
 )
 
-type ConfigurationDatabase struct {
-	Hosts    string `json:"hosts"`
-	Database string `json:"database"`
-}
-
+// Configuration structure
 type Configuration struct {
-	Secret       string `json:"secret"`
-	PublicPath   string `json:"public_path"`
-	TemplatePath string `json:"template_path"`
-	Database     ConfigurationDatabase
+	Secret       string
+	PublicPath   string
+	TemplatePath string
+	Database     struct {
+		Hosts    string
+		Database string
+	}
 }
 
+// Load the configuration
 func (configuration *Configuration) Load(filename string) (err error) {
-	data, err := ioutil.ReadFile(filename)
+	file, err := os.Open(filename)
+
+	defer file.Close()
 
 	if err != nil {
 		return
 	}
 
-	err = configuration.Parse(data)
+	buf, err := ioutil.ReadAll(file)
+	if err != nil {
+		panic(err)
+	}
 
-	return
-}
-
-func (configuration *Configuration) Parse(data []byte) (err error) {
-	err = json.Unmarshal(data, &configuration)
+	if err := toml.Unmarshal(buf, &configuration); err != nil {
+		panic(err)
+	}
 
 	return
 }

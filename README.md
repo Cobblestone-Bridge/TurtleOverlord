@@ -28,6 +28,7 @@ The dependencies will automatically be installed.
  go get github.com/gorilla/context
  go get github.com/gorilla/sessions
  go get github.com/zenazn/goji
+ go get github.com/naoina/toml
  go get gopkg.in/mgo.v2
  go get golang.org/x/crypto
  ```

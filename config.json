@@ -1,9 +1,0 @@
-{
-	"secret": "secret",
-	"public_path": "./public",
-	"template_path": "./views",
-	"database": {
-		"hosts": "localhost",
-		"database": "defaultproject"
-	}
-}
