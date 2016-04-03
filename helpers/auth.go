@@ -7,6 +7,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+// Login function
 func Login(c *mgo.Database, email string, password string) (user *models.User, err error) {
 	err = c.C("users").Find(bson.M{"e": email}).One(&user)
 	if err != nil {

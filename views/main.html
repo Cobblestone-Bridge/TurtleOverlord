@@ -1,11 +1,9 @@
-{{define "main"}}
-	{{template "header" .}}
-	<!-- Navigation -->
+{{define "main"}} {{template "header" .}}
+<!-- Navigation -->
 
-	{{template "navbar"}}
+{{template "navbar"}}
 
-  <div id="wrapper">
-				{{.Content}}
-	</div>
-	{{template "footer" .}}
-{{end}}
+<div id="wrapper">
+    {{.Content}}
+</div>
+{{template "footer" .}} {{end}}
