@@ -8,35 +8,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		make \
 	&& rm -rf /var/lib/apt/lists/*
 
-################## BEGIN INSTALLATION ######################
-# Install MongoDB Following the Instructions at MongoDB Docs
-# Ref: http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
+ENV MONGO_USER=mongodb \
+    MONGO_DATA_DIR=/var/lib/mongodb \
+    MONGO_LOG_DIR=/var/log/mongodb
 
-# Add the package verification key
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+	RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927 \
+	 && echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.2 main" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list \
+	 && apt-get update \
+	 && DEBIAN_FRONTEND=noninteractive apt-get install -y mongodb-org-server mongodb-org-shell \
+	 && sed 's/^bind_ip/#bind_ip/' -i /etc/mongod.conf \
+	 && rm -rf /var/lib/apt/lists/*
 
-# Add MongoDB to the repository sources list
-RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/mongodb.list
 
-# Update the repository sources list once more
-RUN apt-get update
 
-# Install MongoDB package (.deb)
-RUN apt-get install -y mongodb-10gen
-
-# Create the default data directory
-RUN mkdir -p /data/db
-
-##################### INSTALLATION END #####################
-
-# Expose the default port
-EXPOSE 27017
-
-# Default port to execute the entrypoint (MongoDB)
-CMD ["--port 27017"]
-
-# Set default container command
-ENTRYPOINT usr/bin/mongod
+EXPOSE 27017/tcp
+RUN service mongod start
 
 ENV GOLANG_VERSION 1.6
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
@@ -54,10 +40,10 @@ RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 RUN go get github.com/Cobblestone-Bridge/TurtleOverlord
 RUN go get github.com/Masterminds/glide
 
-WORKDIR $GOPATH/src/github.com/Cobblestone-Bridge/TurtleOverlord
+WORKDIR /go/src/github.com/Cobblestone-Bridge/TurtleOverlord
 
 RUN glide install
 
 EXPOSE 8000
 
-COPY go-wrapper /usr/local/bin/
+# Run server
